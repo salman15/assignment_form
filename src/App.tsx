@@ -1,11 +1,12 @@
-import Form from "./components/form/Form";
+import Form from './components/form/Form';
+import Input from './components/input/Input';
 
 function App() {
   return (
     <main className="w-screen h-screen">
-      <section>
+      <section className="w-full h-full">
         <Form>
-          <input />
+          <Input label="Hello world" />
         </Form>
       </section>
     </main>

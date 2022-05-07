@@ -2,32 +2,23 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    jest: true,
   },
   extends: [
-    // "airbnb-typescript",
-    // "airbnb/hooks",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:jest/recommended",
-    "plugin:prettier/recommended",
+    'react-app',
+    'prettier',
+    'prettier/react',
+    'plugin:react/recommended',
+    'standard',
   ],
-  parser: "@typescript-eslint/parser",
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
       tsx: true,
     },
-    ecmaVersion: "latest",
-    sourceType: "module",
-    project: "./tsconfig.json",
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
-  plugins: ["react", "@typescript-eslint", "jest"],
-  rules: {
-    "react/jsx-filename-extension": [
-      2,
-      { extensions: [".js", ".jsx", ".ts", ".tsx"] },
-    ],
-    // suppress errors for missing 'import React' in files
-    "react/react-in-jsx-scope": "off",
-  },
+  plugins: ['react', '@typescript-eslint', 'prettier'],
+  rules: {},
 };
