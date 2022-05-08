@@ -2,6 +2,7 @@ import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { FC } from 'react';
 import { LinksValues } from '../../data/check';
+import Button from '../button/Button';
 
 interface ILinks {
   link: string;
@@ -30,7 +31,9 @@ const Links: FC<ILinks> = ({ link, valid, handle, clear }) => {
       <ul className="flex space-x-2">
         {LinksValues.map((item) => (
           <li key={item}>
-            <button onClick={() => handle(item)}>{item}</button>
+            <Button className="text-sm" onClick={() => handle(item)}>
+              {item}
+            </Button>
           </li>
         ))}
         <li></li>
