@@ -1,51 +1,26 @@
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ChangeEvent, FC, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Button, Checkbox, Input } from '../../components';
+import { checkValues, Links } from '../../data/check';
 import { checkForbiddenChars } from '../../utils/validation';
-
-const checkValues = [
-  {
-    label: 'Do you pick your nose?',
-    checked: false,
-    required: true,
-  },
-  {
-    label: 'Does your breath smell nice?',
-    checked: false,
-    required: false,
-  },
-  {
-    label:
-      'Do you approve pull requests without checking if the code actually works?',
-    checked: false,
-    required: false,
-  },
-  {
-    label: 'Did you enjoy this filling in this form?',
-    checked: false,
-    required: true,
-  },
-  {
-    label: 'Do you approve of this message?',
-    checked: false,
-    required: false,
-  },
-];
 
 const Home: FC = () => {
   const navigate = useNavigate();
-  const [firstInput, setFirstInput] = useState('');
+  const [name, setName] = useState('');
+  const [link, setLink] = useState('');
   const [checks, setChecks] = useState(checkValues);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length % 5 === 0) {
       buttonRef.current?.focus();
     }
-    setFirstInput(e.target.value);
+    setName(e.target.value);
   };
 
   const clearInput = () => {
-    setFirstInput('');
+    setName('');
   };
 
   const handleCheck = (e: number) => {
@@ -60,10 +35,21 @@ const Home: FC = () => {
     navigate('/success');
   };
 
-  const incorrectText = checkForbiddenChars(firstInput);
+  const addToLink = (e: string) => {
+    const str = link.length === 0 ? e : `/${e}`;
+    setLink(`${link}${str}`);
+  };
+
+  const clearLink = () => {
+    setLink('');
+  };
+
+  const incorrectText = checkForbiddenChars(name);
   const missingChecks =
     checks.find((item) => item.required && !item.checked) !== undefined;
-  const validForm = !missingChecks && !incorrectText && firstInput.length > 0;
+  const validLink = link === "You're/A/Wizard/Harry";
+  const validForm =
+    !missingChecks && !incorrectText && validLink && name.length > 0;
 
   return (
     <main className="w-screen h-screen bg-slate-100">
@@ -72,15 +58,23 @@ const Home: FC = () => {
           <h1 className="text-3xl font-bold">Expereo assignment form</h1>
           <Input
             placeholder="John Doe"
-            value={firstInput}
-            classNameInput={firstInput.length > 4 ? '-rotate-180 pl-8' : ''}
+            value={name}
+            classNameInput={name.length > 4 ? '-rotate-180 pl-8' : ''}
             label="Your name (some characters are invalid, so make sure you have the right name!)"
             alert={incorrectText ? 'Invalid characters used!' : undefined}
             onChange={handleChange}
             clearInput={clearInput}
           />
           <div className="flex flex-col space-y-4">
-            <p className="italic text-sm">Some of these are required:</p>
+            <div className="flex items-center">
+              <p className="italic text-sm">Some of these are required:</p>
+              {!missingChecks && (
+                <FontAwesomeIcon
+                  className="ml-2 text-green-500"
+                  icon={faCheck}
+                />
+              )}
+            </div>
             {checks.map((item, i) => (
               <Checkbox
                 labelClassName="text-left"
@@ -90,6 +84,39 @@ const Home: FC = () => {
                 onClick={() => handleCheck(i)}
               />
             ))}
+          </div>
+          <div className="space-y-2">
+            <div className="flex items-center">
+              <p className="font-bold">
+                Link Assemble! (Assemble the correct link)
+              </p>
+              {validLink && (
+                <FontAwesomeIcon
+                  className="ml-2 text-green-500"
+                  icon={faCheck}
+                />
+              )}
+            </div>
+            <p>
+              Link: {link}
+              {link.length > 0 && (
+                <button
+                  className="ml-4"
+                  aria-label="Clear links"
+                  onClick={clearLink}
+                >
+                  <FontAwesomeIcon icon={faTimes} />
+                </button>
+              )}
+            </p>
+            <ul className="flex space-x-2">
+              {Links.map((item) => (
+                <li key={item}>
+                  <button onClick={() => addToLink(item)}>{item}</button>
+                </li>
+              ))}
+              <li></li>
+            </ul>
           </div>
           <Button
             onClick={handleRoute}

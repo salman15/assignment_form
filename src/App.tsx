@@ -4,9 +4,9 @@ import Home from './pages/home';
 import Success from './pages/success';
 
 /**
- * ideas
- * fade in text when validation fails with requirement
- * assemble link from array
+ * Ideas:
+ * Fade in text when validation fails with requirement
+ * Assemble link from array
  */
 
 const App: FC = () => {

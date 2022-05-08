@@ -17,7 +17,14 @@ module.exports = {
   rules: {
     semi: [2, 'always'],
     'comma-dangle': ['error', 'only-multiline'],
-    'space-before-function-paren': [2, 'never'],
+    'space-before-function-paren': [
+      2,
+      {
+        anonymous: 'never',
+        named: 'never',
+        asyncArrow: 'always',
+      },
+    ],
     'react/react-in-jsx-scope': 'off',
   },
 };

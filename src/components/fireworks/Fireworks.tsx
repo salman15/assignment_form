@@ -50,6 +50,7 @@ const Fireworks: FC<IFireworks> = ({ children }) => {
   const getInstance = useCallback((instance: CreateTypes | null) => {
     if (refAnimationInstance.current === null) startAnimation();
     refAnimationInstance.current = instance;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const nextTickAnimation = useCallback(() => {

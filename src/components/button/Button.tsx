@@ -21,11 +21,13 @@ const Button: FC<IButton> = ({
   disabled,
   onClick,
   buttonRef,
+  role,
 }) => {
   const selectedType = buttonTypes[type];
   return (
     <button
       ref={buttonRef}
+      role={role}
       onClick={onClick}
       className={`${className} ${selectedType} ${disabled ? 'opacity-30' : ''}`}
       disabled={disabled}
