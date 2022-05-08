@@ -10,7 +10,9 @@ const Success: FC = () => {
             {({ pause, stop, start }) => {
               return (
                 <>
-                  <h1 className="font-bold text-4xl">Congratulations</h1>
+                  <h1 className="font-bold text-4xl">
+                    Congratulations, everything is oke!
+                  </h1>
                   <p>
                     Despite my best efforts you managed to successfully complete
                     the form!
