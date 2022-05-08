@@ -15,11 +15,13 @@ const Success: FC = () => {
                     Despite my best efforts you managed to successfully complete
                     the form!
                   </p>
-                  <p className="italic text-sm">Confetti controls:</p>
-                  <div className="space-x-4">
-                    <Button onClick={start}>Start</Button>
-                    <Button onClick={pause}>Pause</Button>
-                    <Button onClick={stop}>Stop</Button>
+                  <div className="p-4 border-2 border-gray-200 rounded space-y-4">
+                    <p className="italic text-sm">Fireworks controls:</p>
+                    <div className="space-x-4 ">
+                      <Button onClick={start}>Start</Button>
+                      <Button onClick={pause}>Pause</Button>
+                      <Button onClick={stop}>Stop</Button>
+                    </div>
                   </div>
                 </>
               );
