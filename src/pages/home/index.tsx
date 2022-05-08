@@ -1,9 +1,7 @@
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ChangeEvent, FC, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { Button, Checkbox, Input } from '../../components';
-import { checkValues, Links } from '../../data/check';
+import { Button, Checks, Input, Links } from '../../components';
+import { checkValues } from '../../data/check';
 import { checkForbiddenChars } from '../../utils/validation';
 
 const Home: FC = () => {
@@ -65,59 +63,13 @@ const Home: FC = () => {
             onChange={handleChange}
             clearInput={clearInput}
           />
-          <div className="flex flex-col space-y-4">
-            <div className="flex items-center">
-              <p className="italic text-sm">Some of these are required:</p>
-              {!missingChecks && (
-                <FontAwesomeIcon
-                  className="ml-2 text-green-500"
-                  icon={faCheck}
-                />
-              )}
-            </div>
-            {checks.map((item, i) => (
-              <Checkbox
-                labelClassName="text-left"
-                key={i}
-                active={item.checked}
-                label={item.label}
-                onClick={() => handleCheck(i)}
-              />
-            ))}
-          </div>
-          <div className="space-y-2">
-            <div className="flex items-center">
-              <p className="font-bold">
-                Link Assemble! (Assemble the correct link)
-              </p>
-              {validLink && (
-                <FontAwesomeIcon
-                  className="ml-2 text-green-500"
-                  icon={faCheck}
-                />
-              )}
-            </div>
-            <p>
-              Link: {link}
-              {link.length > 0 && (
-                <button
-                  className="ml-4"
-                  aria-label="Clear links"
-                  onClick={clearLink}
-                >
-                  <FontAwesomeIcon icon={faTimes} />
-                </button>
-              )}
-            </p>
-            <ul className="flex space-x-2">
-              {Links.map((item) => (
-                <li key={item}>
-                  <button onClick={() => addToLink(item)}>{item}</button>
-                </li>
-              ))}
-              <li></li>
-            </ul>
-          </div>
+          <Checks checks={checks} valid={missingChecks} handle={handleCheck} />
+          <Links
+            link={link}
+            valid={validLink}
+            handle={addToLink}
+            clear={clearLink}
+          />
           <Button
             onClick={handleRoute}
             disabled={!validForm}
