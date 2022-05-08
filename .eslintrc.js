@@ -19,6 +19,5 @@ module.exports = {
     'comma-dangle': ['error', 'only-multiline'],
     'space-before-function-paren': [2, 'never'],
     'react/react-in-jsx-scope': 'off',
-    'no-useless-escape': 'never',
   },
 };
