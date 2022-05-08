@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
+import { HTMLComponent } from '../../interfaces';
 
-export interface Iinput {
+export interface Iinput extends HTMLComponent {
   label?: string;
   name?: string | undefined;
   type?: React.HTMLInputTypeAttribute;

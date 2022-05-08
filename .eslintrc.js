@@ -3,13 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: [
-    'react-app',
-    'prettier',
-    'prettier/react',
-    'plugin:react/recommended',
-    'standard',
-  ],
+  extends: ['react-app', 'prettier', 'plugin:react/recommended', 'standard'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -20,5 +14,11 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react', '@typescript-eslint', 'prettier'],
-  rules: {},
+  rules: {
+    semi: [2, 'always'],
+    'comma-dangle': ['error', 'only-multiline'],
+    'space-before-function-paren': [2, 'never'],
+    'react/react-in-jsx-scope': 'off',
+    'no-useless-escape': 'never',
+  },
 };
