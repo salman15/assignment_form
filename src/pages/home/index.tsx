@@ -54,6 +54,13 @@ const Home: FC = () => {
       <section className="w-full h-full max-w-screen-lg mx-auto px-5 lg:px-10 flex justify-center items-center">
         <div className="space-y-4 shadow-lg p-10 w-full bg-white hover:-rotate-90 transition-all duration-50000">
           <h1 className="text-3xl font-bold">Expereo assignment form</h1>
+          <Checks checks={checks} valid={missingChecks} handle={handleCheck} />
+          <Links
+            link={link}
+            valid={validLink}
+            handle={addToLink}
+            clear={clearLink}
+          />
           <Input
             placeholder="John Doe"
             value={name}
@@ -62,13 +69,6 @@ const Home: FC = () => {
             alert={incorrectText ? 'Invalid characters used!' : undefined}
             onChange={handleChange}
             clearInput={clearInput}
-          />
-          <Checks checks={checks} valid={missingChecks} handle={handleCheck} />
-          <Links
-            link={link}
-            valid={validLink}
-            handle={addToLink}
-            clear={clearLink}
           />
           <Button
             onClick={handleRoute}
