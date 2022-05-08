@@ -1,4 +1,5 @@
 import { ChangeEvent, FC, useRef, useState } from 'react';
+import { useNavigate } from 'react-router';
 import { Button, Checkbox, Input } from '../../components';
 import { checkForbiddenChars } from '../../utils/validation';
 
@@ -32,6 +33,7 @@ const checkValues = [
 ];
 
 const Home: FC = () => {
+  const navigate = useNavigate();
   const [firstInput, setFirstInput] = useState('');
   const [checks, setChecks] = useState(checkValues);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -54,6 +56,10 @@ const Home: FC = () => {
     );
   };
 
+  const handleRoute = () => {
+    navigate('/success');
+  };
+
   const incorrectText = checkForbiddenChars(firstInput);
   const missingChecks =
     checks.find((item) => item.required && !item.checked) !== undefined;
@@ -68,7 +74,7 @@ const Home: FC = () => {
             placeholder="John Doe"
             value={firstInput}
             classNameInput={firstInput.length > 4 ? '-rotate-180 pl-8' : ''}
-            label="Your name"
+            label="Your name (some characters are invalid, so make sure you have the right name!)"
             alert={incorrectText ? 'Invalid characters used!' : undefined}
             onChange={handleChange}
             clearInput={clearInput}
@@ -86,6 +92,7 @@ const Home: FC = () => {
             ))}
           </div>
           <Button
+            onClick={handleRoute}
             disabled={!validForm}
             buttonRef={buttonRef}
             className="w-full font-bold"
